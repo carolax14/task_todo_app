@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:task_todo_app/app/core/values/colors.dart';
 import 'package:task_todo_app/app/data/models/task.dart';
@@ -47,12 +48,20 @@ class HomePage extends GetView<HomeController> {
           ],
         ),
       ),
-      floatingActionButton: Obx(
-        () => FloatingActionButton(
-          backgroundColor: controller.deleting.value ? Colors.red : blue,
-          onPressed: () {},
-          child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
-        ),
+      floatingActionButton: DragTarget<Task>(builder: (_, __, ___) {
+          return Obx(
+          () => FloatingActionButton( 
+            backgroundColor: controller.deleting.value ? Colors.red : blue,
+            onPressed: () {},
+            child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
+          ),
+        );
+        },
+        onAccept: (Task task) {
+          controller.deleteTask(task);
+          EasyLoading.showSuccess('Suppression réussie');
+
+        },
       ),
     );
   }
