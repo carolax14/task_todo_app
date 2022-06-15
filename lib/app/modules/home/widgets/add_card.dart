@@ -22,7 +22,36 @@ class AddCard extends StatelessWidget {
       height: squareWidth /2,
       margin: EdgeInsets.all(3.0.wp),
       child: InkWell(
-        onTap: () {},
+        onTap: () async {
+          await Get.defaultDialog(
+            titlePadding: EdgeInsets.symmetric(vertical: 5.0.wp),
+            radius: 5,
+            title: 'Type de Tâche',
+            content: Form(
+              key: homeCtrl.formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 3.0.wp),
+                    child: TextFormField(
+                      controller: homeCtrl.editCtrl,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Titre',
+                      ),
+                      validator: (Value) {
+                        if (Value == null || Value.trim().isEmpty) {
+                          return 'Veuillez entrer un nom de tâche';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            )
+          );
+        },
         child: DottedBorder(
           color: Colors.grey[400]!,
           dashPattern: const [8, 4],
