@@ -25,6 +25,8 @@ class AddDialog extends StatelessWidget {
                 children: [
                   IconButton(onPressed: () {
                     Get.back();
+                    homeCtrl.editCtrl.clear();
+                    homeCtrl.changeTask(null);
                   },
                    icon: const Icon(Icons.close),
                    ),
@@ -79,6 +81,47 @@ class AddDialog extends StatelessWidget {
                 ),
               ),
             ),
+            ...homeCtrl.tasks.map((element) => Obx(
+              () => InkWell(
+                onTap: () => homeCtrl.changeTask(element),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 3.0.wp,
+                    horizontal: 5.0.wp,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                     Row(
+                      children: [
+                         Icon(
+                        IconData(
+                          element.icon,
+                          fontFamily: 'MaterialIcons',
+                        ),
+                          color: HexColor.fromHex(element.color)),
+                        SizedBox(
+                          width: 3.0.wp,
+                        ),
+                      Text(element.title,
+                          style: TextStyle(
+                            fontSize: 12.0.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                     ),
+                      if (homeCtrl.task.value == element)
+                        const Icon(
+                          Icons.check,
+                          color: Colors.blue
+                          )
+                    ],
+              
+                  ),
+                ),
+              ),
+            )).toList()
           ],
         ),
       )

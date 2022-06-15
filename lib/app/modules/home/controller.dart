@@ -12,6 +12,7 @@ class HomeController extends GetxController {
   final editCtrl = TextEditingController();
   final deleting = false.obs;
   final chipIndex = 0.obs;
+  final task = Rx<Task?>(null);
   
   @override
   void onInit() {
@@ -35,6 +36,10 @@ class HomeController extends GetxController {
     deleting.value = value;
   }
 
+  void changeTask(Task? select) {
+    task.value = select;
+  }
+
   bool addTask(Task task) {
     if (tasks.contains(task)){
       return false;
@@ -46,4 +51,6 @@ class HomeController extends GetxController {
   void deleteTask(Task task) {
     tasks.remove(task);
   }
+
+  
 }
