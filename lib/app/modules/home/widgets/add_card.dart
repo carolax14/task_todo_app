@@ -39,14 +39,35 @@ class AddCard extends StatelessWidget {
                         border: OutlineInputBorder(),
                         labelText: 'Titre',
                       ),
-                      validator: (Value) {
-                        if (Value == null || Value.trim().isEmpty) {
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
                           return 'Veuillez entrer un nom de tâche';
                         }
                         return null;
                       },
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.0.wp),
+                    child: Wrap(
+                      spacing: 2.0.wp,
+                      children: icons.map((e) => Obx(
+                        () {
+                          final index = icons.indexOf(e);
+                          return ChoiceChip(
+                            selectedColor: Colors.grey[200],
+                            pressElevation: 0,
+                            backgroundColor: Colors.white,
+                            label: e, 
+                            selected: homeCtrl.chipIndex.value == index,
+                            onSelected: (bool selected) {
+                              homeCtrl.chipIndex.value = selected ? index : 0;
+                            },
+                          );
+                        }
+                      )).toList(),
+                      ),
+                  )
                 ],
               ),
             )
