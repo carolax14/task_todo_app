@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_todo_app/app/data/models/task.dart';
 import 'package:task_todo_app/app/modules/home/controller.dart';
 import 'package:task_todo_app/app/core/utils/extensions.dart';
 import 'package:task_todo_app/app/modules/home/widgets/add_card.dart';
+import 'package:task_todo_app/app/modules/home/widgets/task_card.dart';
 
 
 class HomePage extends GetView<HomeController> {
@@ -27,7 +29,10 @@ class HomePage extends GetView<HomeController> {
               crossAxisCount: 2,
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
-              children: [AddCard()],
+              children: [
+                TaskCard(
+                  task: Task(title: 'title', icon: 0xe59c, color: '#FF2B60E6')),
+                AddCard()],
             )
           ],
         ),
