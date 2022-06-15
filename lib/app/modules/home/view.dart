@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:task_todo_app/app/core/values/colors.dart';
 import 'package:task_todo_app/app/data/models/task.dart';
 import 'package:task_todo_app/app/modules/home/controller.dart';
 import 'package:task_todo_app/app/core/utils/extensions.dart';
@@ -31,12 +32,26 @@ class HomePage extends GetView<HomeController> {
                 physics: const ClampingScrollPhysics(),
                 children: [
                   ...controller.tasks
-                    .map((element) => TaskCard(task: element))
+                    .map((element) => LongPressDraggable(
+                      data: element,
+                      onDragStarted: () => controller.changeDeleting(true),
+                      onDraggableCanceled: (_, __) => controller.changeDeleting(false),
+                      onDragEnd: (_) => controller.changeDeleting(false),
+                      feedback: Opacity(opacity: 0.8,
+                      child: TaskCard(task: element),),
+                      child: TaskCard(task: element)))
                     .toList(),
                   AddCard()],
               ),
             )
           ],
+        ),
+      ),
+      floatingActionButton: Obx(
+        () => FloatingActionButton(
+          backgroundColor: controller.deleting.value ? Colors.red : blue,
+          onPressed: () {},
+          child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
         ),
       ),
     );
