@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'ToDo List using Getx',
+      debugShowCheckedModeBanner: false, // Désactive la bannière
       home: const HomePage(),
       initialBinding: HomeBinding(),
       builder: EasyLoading.init(),
