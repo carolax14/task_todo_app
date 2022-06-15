@@ -74,7 +74,8 @@ class TaskCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(height: 2.0.wp),
-                Text('${task.todos?.length ?? 0} Tâche',
+                Text(
+                  '${task.todos?.length ?? 0} Tâche',
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
