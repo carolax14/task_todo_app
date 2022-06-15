@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:task_todo_app/app/core/utils/extensions.dart';
@@ -34,7 +35,27 @@ class AddDialog extends StatelessWidget {
                     style: ButtonStyle(
                       overlayColor: MaterialStateProperty.all(Colors.transparent)
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (homeCtrl.formKey.currentState!.validate()) {
+                        if (homeCtrl.task.value == null) {
+                          EasyLoading.showError('Veuillez selectionner une catégorie');
+                        } else {
+                          var success = homeCtrl.updateTask(
+                            homeCtrl.task.value!,
+                            homeCtrl.editCtrl.text,
+                           
+                          );
+                          if(success) {
+                            EasyLoading.showSuccess('Tâche ajoutée avec succès');
+                            Get.back();
+                            homeCtrl.changeTask(null);
+                          } else {
+                            EasyLoading.showError('Tâche existe déja');
+                          }
+                          homeCtrl.editCtrl.clear();
+                        }
+                      }
+                    },
                     child: Text('Terminer',
                     style: TextStyle(fontSize: 14.0.sp,),
                     )
@@ -65,7 +86,7 @@ class AddDialog extends StatelessWidget {
                 autofocus: true,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
-                    return 'Veuillez entrer votre todo item';
+                    return 'Veuillez entrer votre tâche';
                   }
                   return null;
                 },
