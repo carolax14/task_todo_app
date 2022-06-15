@@ -3,7 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:task_todo_app/app/core/utils/extensions.dart';
+import 'package:task_todo_app/app/core/values/colors.dart';
+import 'package:task_todo_app/app/data/models/task.dart';
 import 'package:task_todo_app/app/modules/home/controller.dart';
 import 'package:get/get.dart';
 import 'package:task_todo_app/app/widgets/icons.dart';
@@ -67,6 +70,30 @@ class AddCard extends StatelessWidget {
                         }
                       )).toList(),
                       ),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                      minimumSize: const Size(150, 40),
+                    ),
+                    onPressed: () {
+                      if (homeCtrl.formKey.currentState!.validate()) {}
+                      int icon = icons[homeCtrl.chipIndex.value].icon!.codePoint;
+                      String color = icons[homeCtrl.chipIndex.value].color!.toHex();
+                      var task = Task(
+                        title: homeCtrl.editCtrl.text,
+                        icon: icon,
+                        color: color
+                      );
+                      Get.back();
+                      homeCtrl.addTask(task) ?
+                      EasyLoading.showSuccess('Création effectuée'):
+                      EasyLoading.showError('Tâche en double');
+
+                    },
+                    child: const Text('Confirmer'),
                   )
                 ],
               ),
