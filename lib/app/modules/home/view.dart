@@ -53,7 +53,16 @@ class HomePage extends GetView<HomeController> {
           return Obx(
           () => FloatingActionButton( 
             backgroundColor: controller.deleting.value ? Colors.red : blue,
-            onPressed: () => Get.to(() => AddDialog(), transition: Transition.downToUp),
+            onPressed: () {
+              // Si liste des catégorie vide, impossible de créer une tâche
+              //Une alerte informe qu'il faut créer une catégorie avant 
+              if (controller.tasks.isNotEmpty) { 
+                Get.to(() => AddDialog(), transition: Transition.downToUp);
+              } else {
+                EasyLoading.showInfo('Veuillez créer une catégorie');
+              }
+            },
+             
             child: Icon(controller.deleting.value ? Icons.delete : Icons.add),
           ),
         );
