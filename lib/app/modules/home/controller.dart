@@ -86,5 +86,7 @@ class HomeController extends GetxController {
     return todos.any((element) => element['title'] == title);
   }
 
+  addTodo(String text) {}
+
   
 }
