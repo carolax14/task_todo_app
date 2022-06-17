@@ -23,6 +23,7 @@ class TaskCard extends StatelessWidget {
     return GestureDetector(
       onTap: () { 
         homeCtlr.changeTask(task);
+        homeCtlr.changeTodos(task.todos ?? []);
         Get.to(() => DetailPage()); // Affiche le détails de la catégorie sélectionnée
       },
       child: Container(
