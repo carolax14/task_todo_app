@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:task_todo_app/app/data/services/storage/repository.dart';
 
@@ -86,7 +87,20 @@ class HomeController extends GetxController {
     return todos.any((element) => element['title'] == title);
   }
 
-  addTodo(String text) {}
+  bool addTodo(String title) {
+    var todo = {'titre': title, 'fait': false};
+    if (doingTodos.any((element) => mapEquals<String, dynamic>(todo, element))) {
+      return false;
+    }
+    var doneTodo = {'titre': title, 'fait': true};
+    if (doingTodos.any((element) => mapEquals<String, dynamic>(doneTodo, element))){
+       return false;
+    }
+    doingTodos.add(todo);
+    return true;
+  }
+  
+  
 
   
 }
