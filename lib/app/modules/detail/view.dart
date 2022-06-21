@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:task_todo_app/app/core/utils/extensions.dart';
+import 'package:task_todo_app/app/modules/detail/widgets/doing_list.dart';
 import 'package:task_todo_app/app/modules/home/controller.dart';
 
 class DetailPage extends StatelessWidget {
@@ -28,7 +29,9 @@ class DetailPage extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       Get.back();
+                      homeCtrl.updateTodos();
                       homeCtrl.changeTask(null);
+                      homeCtrl.editCtrl.clear();
                     },
                     icon:  const Icon(Icons.arrow_back),
                   )
@@ -116,9 +119,9 @@ class DetailPage extends StatelessWidget {
                       if (homeCtrl.formKey.currentState!.validate()) {
                         var success = homeCtrl.addTodo(homeCtrl.editCtrl.text);
                         if (success) {
-                          EasyLoading.showSuccess('Une nouvelle catégorie a été ajoutée');
+                          EasyLoading.showSuccess('Une nouvelle tâche a été ajoutée');
                         } else {
-                          EasyLoading.showError('Cette catégorie exite déja');
+                          EasyLoading.showError('Cette tâche exite déja');
                         }
                         homeCtrl.editCtrl.clear();
                       }
@@ -134,7 +137,8 @@ class DetailPage extends StatelessWidget {
                 },
                 
               ),
-            )
+            ),
+            DoingList(),
           ],
         ),
       ),
