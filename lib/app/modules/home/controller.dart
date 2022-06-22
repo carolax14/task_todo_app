@@ -48,7 +48,7 @@ class HomeController extends GetxController {
     doneTodos.clear();
     for (int i = 0; i < select.length; i++) {
       var todo = select[i];
-      var status = todo['Fait'];
+      var status = todo['done'];
       if (status == true) {
         doneTodos.add(todo);
       } else {
@@ -88,11 +88,11 @@ class HomeController extends GetxController {
   }
 
   bool addTodo(String title) {
-    var todo = {'titre': title, 'fait': false};
+    var todo = {'title': title, 'done': false};
     if (doingTodos.any((element) => mapEquals<String, dynamic>(todo, element))) {
       return false;
     }
-    var doneTodo = {'titre': title, 'fait': true};
+    var doneTodo = {'title': title, 'done': true};
     if (doingTodos.any((element) => mapEquals<String, dynamic>(doneTodo, element))){
        return false;
     }
@@ -111,6 +111,17 @@ class HomeController extends GetxController {
     int oldIdX = tasks.indexOf(task.value);
     tasks[oldIdX] = newTask;
     tasks.refresh();
+  }
+
+  void doneTodo(String title) {
+    var doingTodo = {'title': title, 'done': false};
+    int index = doingTodos.indexWhere(
+      (element) => mapEquals<String, dynamic>(doingTodo, element));
+    doingTodos.removeAt(index);
+    var doneTodo = {'title': title, 'done': true};
+    doneTodos.add(doneTodo);
+    doingTodos.refresh();
+    doneTodos.refresh();
 
   }
   
