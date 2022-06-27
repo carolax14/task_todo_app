@@ -73,6 +73,32 @@ class HomePage extends GetView<HomeController> {
 
         },
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (int index) => controller.changeTabIndex(index),
+        currentIndex: controller.tabIndex.value,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: [
+          BottomNavigationBarItem(
+            label: 'Accueil',
+            icon: Padding(
+              padding: EdgeInsets.only(right: 15.0.wp),
+              child: const Icon(
+                Icons.apps,
+                ),
+            ),
+            ), 
+          BottomNavigationBarItem(
+            label: 'Rapport',
+            icon: Padding(
+              padding: EdgeInsets.only(left: 15.0.wp),
+              child: const Icon(
+                Icons.data_usage,
+                ),
+            ),
+            ),
+        ],
+      ),
     );
   }
 }
