@@ -3,7 +3,9 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 import 'package:task_todo_app/app/core/utils/extensions.dart';
+import 'package:task_todo_app/app/core/values/colors.dart';
 import 'package:task_todo_app/app/modules/home/binding.dart';
 import 'package:task_todo_app/app/modules/home/controller.dart';
 import 'package:intl/intl.dart'; 
@@ -20,7 +22,7 @@ class ReportPage extends StatelessWidget {
           var createdTasks = homeCtrl.getTotalTask();
           var completedTasks = homeCtrl.getTotalDoneTask();
           var liveTasks = createdTasks - completedTasks;
-          var precent = (completedTasks / createdTasks * 100).toStringAsFixed(0);
+          var percent = (completedTasks / createdTasks * 100).toStringAsFixed(0);
           return ListView(
             children: [
               Padding(
@@ -60,6 +62,46 @@ class ReportPage extends StatelessWidget {
                     _buildStatus(Colors.orange, completedTasks, 'Terminé'),
                     _buildStatus(Colors.blue, createdTasks, 'Créer'),
                   ],
+                ),
+              ),
+              SizedBox(height: 8.0.wp),
+              UnconstrainedBox(
+                child: SizedBox(
+                  width: 70.0.wp,
+                  height: 70.0.wp,
+                  child: CircularStepProgressIndicator(
+                    totalSteps: createdTasks == 0 ? 1 : createdTasks,
+                    currentStep: completedTasks,
+                    stepSize:  20,
+                    selectedColor: green,
+                    unselectedColor: Colors.grey[200],
+                    padding: 0,
+                    width: 150,
+                    height: 150,
+                    selectedStepSize: 22,
+                    roundedCap: (_, __) => true,
+                    child: 
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          '${createdTasks == 0 ? 0 : percent} %',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0.sp,
+                          ),
+                        ),
+                        SizedBox(height: 1.0.wp),
+                        Text(
+                          'Rendement',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12.0.sp,
+                        ),)
+                      ],
+                    ),
+                  ),
                 ),
               )
             ],
