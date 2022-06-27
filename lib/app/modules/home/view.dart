@@ -73,6 +73,7 @@ class HomePage extends GetView<HomeController> {
 
         },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int index) => controller.changeTabIndex(index),
         currentIndex: controller.tabIndex.value,
@@ -86,7 +87,7 @@ class HomePage extends GetView<HomeController> {
               child: const Icon(
                 Icons.apps,
                 ),
-            ),
+              ),
             ), 
           BottomNavigationBarItem(
             label: 'Rapport',
@@ -96,7 +97,7 @@ class HomePage extends GetView<HomeController> {
                 Icons.data_usage,
                 ),
             ),
-            ),
+          ),
         ],
       ),
     );
