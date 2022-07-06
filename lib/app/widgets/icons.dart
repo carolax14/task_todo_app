@@ -10,5 +10,15 @@ List<Icon> getIcon(){
     Icon(IconData(sportIcon, fontFamily: 'MaterialIcons'), color: yellow),
     Icon(IconData(travelIcon, fontFamily: 'MaterialIcons'), color: deepPink),
     Icon(IconData(shopIcon, fontFamily: 'MaterialIcons'), color: lightBlue),
+    Icon(IconData(bookIcon, fontFamily: 'MaterialIcons')),
+    Icon(IconData(colorIcon, fontFamily: 'MaterialIcons')),
+    Icon(IconData(constructIcon, fontFamily: 'MaterialIcons')),
+    Icon(IconData(laptopIcon, fontFamily: 'MaterialIcons')),
+    Icon(IconData(euroIcon, fontFamily: 'MaterialIcons')),
+    Icon(IconData(favoriteIcon, fontFamily: 'MaterialIcons')),
+    Icon(IconData(foodIcon, fontFamily: 'MaterialIcons')),
+    Icon(IconData(restaurentIcon, fontFamily: 'MaterialIcons')),
+    Icon(IconData(mailIcon, fontFamily: 'MaterialIcons')),
+
   ];
 }

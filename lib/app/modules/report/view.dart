@@ -93,7 +93,7 @@ class ReportPage extends StatelessWidget {
                         ),
                         SizedBox(height: 1.0.wp),
                         Text(
-                          'Rendement',
+                          'Effectuées',
                         style: TextStyle(
                           color: Colors.grey,
                           fontWeight: FontWeight.bold,
